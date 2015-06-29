@@ -1,17 +1,14 @@
 var _ = require('underscore');
-var Promise = require('bluebird');
 var request = require('request-promise');
 var Users = require('./users');
 
-function Api(applicationId, applicationApiKey) {
-  var auth = {
-    applicationId: applicationId,
-    applicationApiKey: applicationApiKey
-  }
+function Api(config) {
+  this.url = config.url || 'http://rbac.us';
+  this.auth = _.pick(config, 'applicationId', 'applicationApiKey');
 
   this.get = function(path, query) {
     var url = this.url + '/api/v1' + path;
-    query = _.extend({}, query, auth);
+    query = _.extend({}, query, this.auth);
     return request.get(url, {
       headers: {
         'Accept': 'application/json'
@@ -22,9 +19,5 @@ function Api(applicationId, applicationApiKey) {
 
   this.users = new Users(this);
 }
-
-_.extend(Api.prototype, {
-  url: 'http://rbac.us'
-});
 
 module.exports = Api;

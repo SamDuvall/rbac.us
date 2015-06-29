@@ -1,6 +1,6 @@
 # rbac.us
 
-The API to http://rbac.us
+The Interface to http://rbac.us
 
 ## Installation
 
@@ -11,13 +11,14 @@ The API to http://rbac.us
 ### Initialization
 Using the applicationId and applicationApiKey from http://rbac.us
 
-    var Api = require('rbac.us/api');
-    var api = new Api(applicationId, applicationApiKey);
+    var Rbac = require('rbac.us').Interface;
+    var rbac = new Api({
+      applicationId: applicationId,
+      applicationApiKey: applicationApiKey
+    });
 
 ### Users
 
-Get a specific user's information (e.g. settings, organizations, permissions) by email
+Get a specific user's organizations and permissions by email
 
-    api.users.findByEmail(email).then(function(user) {
-      // returns json or undefined if no user found
-    });
+    rbac.users.getOrganizations(email);
