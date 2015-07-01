@@ -10,6 +10,12 @@ _.extend(Permissions.prototype, {
     return _.chain(this.organizations).filter(function(organization) {
       return _.include(organization.permissions, permission);
     }).pluck('id').value();
+  },
+
+  // Determine if we have this permission on the organization
+  can: function(permission, organizationId) {
+    var organization = _.findWhere(this.organizations, {id: organizationId});
+    return organization && _.include(organization.permissions, permission);
   }
 });
 

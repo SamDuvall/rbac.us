@@ -1,7 +1,7 @@
 {
   "name": "rbac.us",
   "description": "The Interface to http://rbac.us",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "node": ">=0.10.0"
   },
